@@ -42,19 +42,6 @@ func loggerConfig() string {
 	}
 	// Clean the path to replace with OS-specific separators
 	logfile = filepath.Clean(logfile)
-	config := `
-	<seelog type="asyncloop" minlevel="debug">
-		<outputs formatid="main">
-			<rollingfile filename="` + logfile + `" type="date"
-			 datepattern="2006-01-02-15" archivetype="none" maxrolls="2" />
-			<filter levels="warn,error,critical">
-				<console />
-			</filter>
-		</outputs>
-		<formats>
-			<format id="main" format="%UTCDate(2006-01-02T15:04:05Z07:00) [%LEVEL] %Msg%n" />
-		</formats>
-	</seelog>
-`
+	config := configFile(logfile)
 	return config
 }
